@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dmf:Part xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%"
+		 xmlns:dmf="org.nad.dm.*" creationComplete="init();">
+	<fx:Script>
+		<![CDATA[
+			import flash.display.Loader;
+			
+			import mx.controls.Image;
+			import mx.controls.Text;
+			
+			import org.nad.dm.Application;
+			
+			import spark.components.Label;
+			
+			private var logo:Image;
+			private var title:Label;
+			private var description:Text;
+			private var _this:WelcomeScreen = this as WelcomeScreen;
+			
+			private function init():void{
+				this.visible = true;
+			}
+			private function startMainContainer() : void {
+				var parent:Object = this.parentApplication;
+				if(typeof parent['fullscreen'] == 'function'){
+					parent['fullscreen']();
+				}else{
+					trace('noFullscreenMode');
+				}
+				this.visible = false;
+				(parent as Application).start();
+			}
+			public function set Logo( source:String ) : void{
+				if(logo == null){
+					logo = new Image();
+				}
+				logo.source = source;
+				this.addChild(logo);
+			}
+			public function set logoTop(value : uint) : void{
+				if(logo == null){
+					logo = new Image();
+				}
+				logo.y = value;
+			}
+			public function set logoAlignment(value : String) : void {
+				if(logo == null){
+					logo = new Image();
+				}
+				switch(value){
+					case 'center': logo.horizontalCenter = 0; break;
+					case 'left': logo.left = 0;
+					case 'right': logo.right = 0;
+					default: var space:int = parseInt(value);
+						if(space < 0){
+							logo.right = Math.abs(space);
+						}else{
+							logo.left = space;
+						}
+				}
+			}
+			public function set Description( value:String ) : void {
+				if(description == null){
+					description = new Text();
+				}
+				description.text = value;
+				this.addChild(description);
+			}
+			public function set descriptionTop( value:uint) : void{
+				if(description == null){
+					description = new Text();
+				}
+				description.top = value;
+			}
+			
+			public function set descriptionAlignment( value:String) : void{
+				if(description == null){
+					description = new Text();
+				}
+				switch(value){
+					case 'center': description.horizontalCenter = 0;
+					case 'left': description.left = 0;
+					case 'right': description.right = 0;
+					default: var space:int = parseInt(value);
+						if(space < 0){
+							description.right = Math.abs(space);
+						}else{
+							description.left = space;
+						}
+				}
+			}
+			
+			public function set descriptionWidth( value:uint ) : void{
+				if(description == null){
+					description = new Text();
+				}
+				description.width = value;
+			}
+			
+			public function set Title( value:String ) : void {
+				if(title == null){
+					title = new Label();
+				}
+				title.text = value;
+				this.addChild(title);
+			}
+			
+			public function set titleAlignment( value:String ) : void{
+				if(title == null){
+					title = new Label();
+				}
+				switch(value){
+					case 'center': title.horizontalCenter = 0; title.setStyle('textAlign','center'); 
+						break;
+					case 'left': title.left = 0; title.setStyle('textAlign','left'); 
+						break;
+					case 'right': title.right = 0; title.setStyle('textAlign','right'); 
+						break;
+					default: var space:int = parseInt(value);
+						if(space < 0){
+							title.right = Math.abs(space);
+						}else{
+							title.left = space;
+						}
+				}
+			}
+			public function set titleTop( value:uint ) : void {
+				if(title == null){
+					title = new Label();
+				}
+				title.top = value;
+			}
+			public function set titleColor( value:uint ) : void {
+				if(title == null){
+					title = new Label();
+				}
+				title.setStyle('color', value);
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Platzieren Sie nichtvisuelle Elemente (z. B. Dienste, Wertobjekte) hier -->
+	</fx:Declarations>
+	<s:Button click="startMainContainer()" label="Start" bottom="220" horizontalCenter="0"/>
+</dmf:Part>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dmf:Frame xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  xmlns:dmf="org.nad.dm.*"
+		  visible="false" top="0" left="0" width="100%" height="100%">
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Text;
+			
+			private var _text:Text;
+			
+			public function set instruction(str:String) : void {
+				if(this._text == null){
+					this._text = new Text();
+					this._text.setStyle('color', this.getStyle('color'));
+					this._text.setStyle('horizontalCenter',0);  
+					this._text.setStyle('verticalCenter', 0);
+					this.addChild(this._text);
+				}
+				this._text.text = str;
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Platzieren Sie nichtvisuelle Elemente (z. B. Dienste, Wertobjekte) hier -->
+	</fx:Declarations>
+</dmf:Frame>
