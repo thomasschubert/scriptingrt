@@ -1,4 +1,4 @@
-package org.nad.dm{
+﻿package org.nad.dm{
 	import flash.display.DisplayObject;
 	import flash.errors.IllegalOperationError;
 	import flash.events.Event;
@@ -81,6 +81,8 @@ package org.nad.dm{
 			}else{
 				//FlexGlobals.topLevelApplication as Application ).protocol = 'proto is null in Feedback';
 			}
+			this.height = FlexGlobals.topLevelApplication.height;
+			this.width = FlexGlobals.topLevelApplication.width;
 			super.show(); // if there is a path, then it ends here
 		}
 		

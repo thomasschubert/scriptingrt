@@ -1,6 +1,13 @@
 package org.nad.dm
+	
+	//changed by TS 25/03/13
+	// added public var total:uint = 0; in public class TestPart
+	// added this.total = this.chainedChilds.length; in public function addResults
+	// added 'total': this.chainedChilds.length in public function branch()
+	
+	
 {
-
+	
 	import flashx.textLayout.formats.Float;
 	
 	import mx.core.FlexGlobals;
@@ -18,6 +25,7 @@ package org.nad.dm
 		public var noresponses:uint = 0;
 		public var goals:uint = 0;
 		public var count:uint = 0;
+		public var total:uint = 0;
 		
 		public function set scramble(type:int) : void {
 			this._scramble = type;
@@ -79,23 +87,24 @@ package org.nad.dm
 				}
 			}
 			this.avg = this.sum / this.count;
-			
+			this.total = this.chainedChilds.length;
 		}
 		
 		public function branch() : String { // wird erst nach frame.hide gefragt in frame.next
 			if(this._branches != null){
 				trace('testPart.branch:', this._branches.length);
 				var evalObject:Object = {
-						'incorrect': this.failures,
+					'incorrect': this.failures,
 						'miss': this.noresponses,
 						'correct': this.goals,
 						'sum': this.sum,
 						'avg': this.avg,
-						'count': this.count
-					};
+						'count': this.count,
+						'total': this.total
+				};
 				for(var i:uint=0,l:uint=this._branches.length; i < l; i++){
 					if(this._branches[i].eval(evalObject, this)){
-				
+						
 						return this._branches[i].next;
 					}
 				}
